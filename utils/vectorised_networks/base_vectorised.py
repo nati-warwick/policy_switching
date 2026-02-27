@@ -5,9 +5,6 @@ import torch.nn.functional as F
 
 def weights_init(module,ensemble_idx, critic_factor):
     if type(module).__name__ == 'VectorisedLinear':
-       #for cf_idx in range(critic_factor):
-       #    nn.init.kaiming_uniform_(module.weight[ensemble_idx][cf_idx], a=math.sqrt(5))
-       #nn.init.kaiming_uniform_(module.weight, a=math.sqrt(5))
         module.reset_parameters()
     elif isinstance(module, nn.Linear):
         nn.init.kaiming_uniform_(module.weight, a=math.sqrt(5))
@@ -60,39 +57,12 @@ class BaseVectorisedNetwork(nn.Module):
         
         self.ensemble_num = ensemble_num 
         self.critic_factor = critic_factor
-       #self.cat_dim = 1 if self.ensemble_num == 1 else 2
         self.cat_dim = 3
 
         self.in_dims = obs_dims + kwargs['action_dims'] if kwargs.get('action_dims') else obs_dims
 
         self.hidden_activation = getattr(torch.nn,model_info['hidden_activation'],None)
 
-        ##by outputting in_dims we can create multiple networks that share a base network
-        ##we need to reemember the final layer dims of the base network hence why we return in_dims
-        ## instead of changing in place
-
-       #self.base_model, self.in_dims = self.construct_model(model_info)
-
-
-
-        ## moving to device or optimsier cant be put here becasue custom layers
-        ## wont be added to specified device or optimised!!!
-
-
-   #def forward(self, state, action=None):
-   #    ##in the scenario where the ensemble actor creates multiple actions
-   #    ##and the critic uses the state from the dataset, the state needs to 
-   #    ##be replicated by number of actor 
-   #    
-
-   #    if action is not None: #This will only be true for critics
-   #        ##state and action get broadcasted to the ensemble
-   #        x = torch.cat([state,action],self.cat_dim)
-   #    else:
-   #        x = state
-
-   #    x = self.base_model(x)
-   #    return x
 
     def reset_weights(self, ensemble_idx):
         'reset parameters of a specific ensemble'
