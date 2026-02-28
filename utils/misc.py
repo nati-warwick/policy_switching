@@ -1,10 +1,11 @@
 import os, sys
 import torch
 import numpy as np
-import d4rl
 import h5py
 import ntpath
 import wandb
+
+from utils.compat import ensure_d4rl_registered
 
 def wandb_init(config_dict):
     wandb.init(
@@ -29,6 +30,7 @@ def soft_update(target,source,tau):
     target.load_state_dict(target_params_dict)
 
 def get_dataset(env):
+    d4rl = ensure_d4rl_registered()
 
     path = os.path.expanduser('~/.d4rl/datasets')
     file_name = ntpath.basename(env.spec.kwargs['dataset_url'])
@@ -113,4 +115,3 @@ def get_returns_to_go(agent):
             terminal = []
 
     return torch.tensor(returns,dtype=torch.float,device=agent.device)
-

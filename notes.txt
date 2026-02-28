@@ -1,5 +1,12 @@
 How to get D4RL to work on machines
 
+These manual edits are now replaced by an in-repo runtime patcher:
+- `utils/compat.py`
+- It is called automatically from `main.py` and `execution_scripts/__init__.py`
+- Use `python smoke_test_compat.py --env-id halfcheetah-medium-v2` to validate locally
+
+Legacy manual instructions (kept for reference):
+
 Execute:
 
 - pip install gym==0.26.2

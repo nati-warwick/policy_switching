@@ -3,6 +3,7 @@ dependencies:
   - python==3.10
   - pip
   - pip:
+    - gym==0.26.2
     - torch
     - numpy==1.26.4
     - tensorboardX
@@ -11,9 +12,7 @@ dependencies:
     - pettingzoo
     - matplotlib
     - stable_baselines3
-    - git+https://github.com/Farama-Foundation/d4rl@master#egg=d4rl
+    - tqdm
     - patchelf
     - cython<3
     - wandb
-
-

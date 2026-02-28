@@ -1,3 +1,7 @@
+from utils.compat import apply_runtime_compat_patches, ensure_d4rl_registered
+
+apply_runtime_compat_patches()
+
 import torch
 import numpy as np
 import gym
@@ -8,6 +12,7 @@ from utils.plotting_scripts import plot_online_return, plot_online_std
 
 
 if __name__ == '__main__':
+    ensure_d4rl_registered()
     model_info = {'layers':[256,256,256], ##base layer model spec
                   'hidden_activation':'ReLU', ##activation for hidden laeyrs
                   'critic_final_activation':'',
@@ -105,4 +110,3 @@ if __name__ == '__main__':
     
    #plot_online_return(config_dict)
    #plot_online_std(config_dict)
-
