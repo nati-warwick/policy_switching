@@ -11,7 +11,14 @@ run setup.sh to create a virtual environment and install necessary dependancies
 
 ## Running code
 
-To run code, execute `python main.py`
+`main.py` now supports CLI arguments, so you no longer need to edit the file for common runs.
+
+- default run (same behavior as before): `python main.py`
+- select algorithm/environment: `python main.py --algo combined --env-id antmaze-umaze-diverse-v2`
+- run online mode: `python main.py --algo td3_n --online`
+- inspect resolved config without training: `python main.py --print-config --dry-run`
+
+Use `python main.py --help` to see all options.
 
 ## Environment Notes
 
